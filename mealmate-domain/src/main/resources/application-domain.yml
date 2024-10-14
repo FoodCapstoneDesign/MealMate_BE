@@ -1,0 +1,7 @@
+spring.application.name=mealmate-domain
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev

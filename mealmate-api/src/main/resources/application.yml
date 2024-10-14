@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+    include:
+      - s3
+      - common
+      - domain
+      - storage
+
+jwt:
+  header: ${JWT_HEADER}
+  secret: ${JWT_SECRET_KEY}
+  token-validity-in-seconds: ${JWT_EXPIRATION}
