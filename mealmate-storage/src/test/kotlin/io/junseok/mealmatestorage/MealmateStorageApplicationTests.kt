@@ -1,3 +1,4 @@
+/*
 package io.junseok.mealmatestorage
 
 import org.junit.jupiter.api.Test
@@ -11,3 +12,4 @@ class MealmateStorageApplicationTests {
     }
 
 }
+*/

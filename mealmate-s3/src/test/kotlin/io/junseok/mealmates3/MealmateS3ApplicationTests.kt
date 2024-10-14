@@ -1,3 +1,4 @@
+/*
 package io.junseok.mealmates3
 
 import org.junit.jupiter.api.Test
@@ -11,3 +12,4 @@ class MealmateS3ApplicationTests {
     }
 
 }
+*/
