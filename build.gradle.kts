@@ -90,25 +90,4 @@ subprojects {
             enabled = true
         }
     }
-
-    if (name == "mealmate-api") {
-        apply(plugin = "com.google.cloud.tools.jib")
-
-        jib {
-            from {
-                image = "openjdk@sha256:528707081fdb9562eb819128a9f85ae7fe000e2fbaeaf9f87662e7b3f38cb7d8"
-            }
-            to {
-                image = "${System.getenv("DOCKER_USERNAME")}/mealmate-0.0.1-api-snapshot"
-                auth {
-                    username = System.getenv("DOCKER_USERNAME") ?: ""
-                    password = System.getenv("DOCKER_TOKEN") ?: ""
-                }
-            }
-            container {
-                ports = listOf("8080")
-                mainClass = "io.junseok.mealmateapi.MealmateApiApplication"
-            }
-        }
-    }
 }
