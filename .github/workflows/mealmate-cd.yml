@@ -65,7 +65,8 @@ jobs:
       - name: docker build
         run: |
           chmod +x gradlew
-          ./gradlew clean build --parallel
+          ./gradlew clean --stacktrace
+          ./gradlew :mealmate-api:build
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
           echo "git will pull origin : [${{ needs.env.outputs.branch }}]"
           echo "git checkout finish"
