@@ -1,6 +1,7 @@
 package io.junseok.mealmateapi.presentation.restaurant
 
 import io.junseok.domain.restaurant.RestaurantService
+import io.junseok.mealmateapi.imagewrapper.toInputStreamFile
 import io.junseok.mealmateapi.presentation.restaurant.dto.request.RestaurantRegisterRequest
 import io.junseok.mealmateapi.presentation.restaurant.dto.request.RestaurantRegisterRequest.Companion.toDomain
 import io.junseok.mealmateapi.presentation.restaurant.dto.request.SearchRequest
@@ -27,7 +28,7 @@ class RestaurantController(
         ResponseEntity.ok(
             restaurantService.createRestaurant(
                 restaurantRegisterRequest.toDomain(),
-                imageFile
+                imageFile.toInputStreamFile()
             )
         )
 

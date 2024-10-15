@@ -5,9 +5,9 @@ import io.junseok.domain.restaurant.serviceimpl.RestaurantDeleter
 import io.junseok.domain.restaurant.serviceimpl.RestaurantReader
 import io.junseok.domain.restaurant.serviceimpl.RestaurantValidator
 import io.junseok.domain.restaurantmenu.serviceimpl.RestaurantMenuReader
+import io.junseok.image.FileConversion
 import io.junseok.service.S3UploadImage
 import org.springframework.stereotype.Service
-import org.springframework.web.multipart.MultipartFile
 
 @Service
 class RestaurantService(
@@ -20,7 +20,7 @@ class RestaurantService(
 ) {
     fun createRestaurant(
         restaurantRegister: RestaurantRegister,
-        imageFile: MultipartFile
+        imageFile: FileConversion
     ): Long?{
         restaurantValidator.isExist(restaurantRegister.restaurantName)
         val s3Response = s3UploadImage.saveImage(imageFile)
