@@ -19,9 +19,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Build mealmate-api
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: ":mealmate-api:clean build"
+      run: ./gradlew :mealmate-api:clean build
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
