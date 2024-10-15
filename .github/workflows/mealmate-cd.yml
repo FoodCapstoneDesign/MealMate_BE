@@ -65,11 +65,9 @@ jobs:
       - name: JIB Build and Push
         run: |
           chmod +x gradlew
-          ./gradlew clean jib --stacktrace
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-
+          ./gradlew clean jib --stacktrace -PDOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} -PDOCKER_TOKEN=${{ secrets.DOCKER_TOKEN }}
+      
+      
 
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.8

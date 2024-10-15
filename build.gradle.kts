@@ -18,6 +18,28 @@ plugins {
     id("jacoco")
 }
 
+project(":mealmate-api"){
+    if (name == "mealmate-api") {
+        jib {
+            from {
+                image = "openjdk:17"
+            }
+            to {
+                image = "${project.findProperty("DOCKER_USERNAME")}/mealmate-0.0.1-api-snapshot"
+                auth {
+                    username = project.findProperty("DOCKER_USERNAME").toString()
+                    password = project.findProperty("DOCKER_TOKEN").toString()
+                }
+            }
+            container {
+                ports = listOf("8080")
+                mainClass = "io.junseok.mealmateapi.MealmateApiApplication"
+            }
+        }
+    }
+
+}
+
 allprojects{
     group = "io.junseok"
     version = "0.0.1-SNAPSHOT"
@@ -45,24 +67,6 @@ subprojects{
         }
     }
     dependencies {
-        if (name == "mealmate-api") {
-            jib {
-                from {
-                    image = "openjdk:17"
-                }
-                to {
-                    image = "${System.getenv("DOCKER_USERNAME")}/mealmate-0.0.1-api-snapshot"
-                    auth {
-                        username = System.getenv("DOCKER_USERNAME")
-                        password = System.getenv("DOCKER_TOKEN")
-                    }
-                }
-                container {
-                    ports = listOf("8080")
-                    mainClass = "io.junseok.mealmateapi.MealmateApiApplication"
-                }
-            }
-        }
         if (name!="mealmate-common"){
             implementation(project(":mealmate-common"))
         }
