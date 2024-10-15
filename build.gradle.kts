@@ -70,9 +70,9 @@ subprojects {
                 mainClass = "io.junseok.mealmateapi.MealmateApiApplicationKt"
                 jvmFlags = listOf("-Xms512m", "-Xmx512m")
             }
-            setAllowInsecureRegistries(true)
         }
     }
+
     dependencies {
         if (name != "mealmate-common") {
             implementation(project(":mealmate-common"))
