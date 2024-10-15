@@ -46,16 +46,8 @@ subprojects{
         if (name!="mealmate-common"){
             implementation(project(":mealmate-common"))
         }
-        if(name == "mealmate-s3"){
-            implementation("org.springframework.boot:spring-boot-starter-web")
-        }
         val mockkVersion = "1.13.8"
         val kotestVersion = "5.8.0"
-        //query dsl
-        /*val querydslVersion = "5.0.0"
-        implementation("com.querydsl:querydsl-jpa:$querydslVersion")
-        kapt("com.querydsl:querydsl-apt:$querydslVersion:jpa")
-*/
         implementation("org.jetbrains.kotlin:kotlin-reflect") // blog
         kapt("org.springframework.boot:spring-boot-configuration-processor")
 
@@ -67,14 +59,10 @@ subprojects{
 
         //etc
         compileOnly ("org.projectlombok:lombok")
-        //kapt("org.projectlombok:lombok")
         implementation ("org.springframework.boot:spring-boot-starter-validation")
         implementation ("io.github.microutils:kotlin-logging:3.0.5")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-
-        //swagger
-        implementation ("org.springdoc:springdoc-openapi-ui:1.7.0")
 
         implementation ("org.springframework.boot:spring-boot-starter-actuator")
 
