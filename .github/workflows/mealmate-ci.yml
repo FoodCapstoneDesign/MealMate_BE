@@ -19,8 +19,8 @@ jobs:
         distribution: 'temurin'
 
     - name: Build mealmate-api
-      run: ./gradlew mealmate-api:clean build
-
+      run: ./gradlew :mealmate-api:clean build --stacktrace
+      
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: ${{ always() }}
