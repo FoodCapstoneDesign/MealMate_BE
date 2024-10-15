@@ -36,39 +36,43 @@ allprojects {
     }
 }
 
-project(":mealmate-api") {
-    apply(plugin = "com.google.cloud.tools.jib")
-
-    tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
-        mainClass.set("io.junseok.mealmateapi.MealmateApiApplication")
-    }
-
-    jib {
-        from {
-            image = "openjdk:17"
-        }
-        to {
-            image = "${System.getenv("DOCKER_USERNAME")}/mealmate-0.0.1-api-snapshot"
-            auth {
-                username = System.getenv("DOCKER_USERNAME") ?: ""
-                password = System.getenv("DOCKER_TOKEN") ?: ""
-            }
-        }
-        container {
-            ports = listOf("8080")
-            mainClass = "io.junseok.mealmateapi.MealmateApiApplication"
-        }
-    }
-}
-
-
 subprojects {
     java {
         toolchain {
             languageVersion = JavaLanguageVersion.of(17)
         }
     }
+    if (name == "mealmate-api") {
+        apply(plugin = "com.google.cloud.tools.jib")
 
+        tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+            enabled = true
+            mainClass.set("io.junseok.mealmateapi.MealmateApiApplicationKt")
+        }
+
+        tasks.getByName<Jar>("jar") {
+            enabled = false
+        }
+
+        jib {
+            from {
+                image = "openjdk:17-jdk-slim"
+            }
+            to {
+                image = "${System.getenv("DOCKER_USERNAME") ?: "default"}/mealmate-0.0.1-api-snapshot"
+                auth {
+                    username = System.getenv("DOCKER_USERNAME") ?: ""
+                    password = System.getenv("DOCKER_TOKEN") ?: ""
+                }
+            }
+            container {
+                ports = listOf("8080")
+                mainClass = "io.junseok.mealmateapi.MealmateApiApplicationKt"
+                jvmFlags = listOf("-Xms512m", "-Xmx512m")
+            }
+            setAllowInsecureRegistries(true)
+        }
+    }
     dependencies {
         if (name != "mealmate-common") {
             implementation(project(":mealmate-common"))
