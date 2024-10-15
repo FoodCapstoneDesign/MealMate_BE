@@ -21,6 +21,19 @@ tasks {
     }
 }
 
-tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
-    mainClass.set("io.junseok.mealmateapi.MealmateApiApplication")
+jib {
+    from {
+        image = "openjdk:17"
+    }
+    to {
+        image = "${System.getenv("DOCKER_USERNAME")}/mealmate-0.0.1-api-snapshot"
+        auth {
+            username = System.getenv("DOCKER_USERNAME") ?: ""
+            password = System.getenv("DOCKER_TOKEN") ?: ""
+        }
+    }
+    container {
+        ports = listOf("8080")
+        mainClass = "io.junseok.mealmateapi.MealmateApiApplication"
+    }
 }
