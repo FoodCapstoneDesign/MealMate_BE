@@ -65,7 +65,7 @@ jobs:
       - name: JIB Build and Push
         run: |
           chmod +x gradlew
-          ./gradlew clean jib --stacktrace -PDOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} -PDOCKER_TOKEN=${{ secrets.DOCKER_TOKEN }}
+          ./gradlew clean :mealmate-api:jib --stacktrace -PDOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} -PDOCKER_TOKEN=${{ secrets.DOCKER_TOKEN }}
       
       
 
