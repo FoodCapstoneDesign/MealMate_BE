@@ -20,3 +20,7 @@ tasks {
         enabled = false
     }
 }
+
+tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    mainClass.set("io.junseok.mealmateapi.MealmateApiApplication")
+}
