@@ -23,7 +23,7 @@ jobs:
         
     - name: Build mealmate-api
       run: |
-        ./gradlew :mealmate-api:clean --stacktrace
+        ./gradlew clean --stacktrace
         ./gradlew :mealmate-api:build --stacktrace
       
     - name: Publish Unit Test Results
