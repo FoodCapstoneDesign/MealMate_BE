@@ -7,6 +7,7 @@ plugins {
 
     id("org.springframework.boot") version springBootVersion
     id("io.spring.dependency-management") version dependencyVersion
+    id("com.google.cloud.tools.jib") version "3.3.1"
 
     kotlin("jvm") version kotlinVersion // Kotlin을 JVM 바이트코드로 컴파일하는데 필요
     kotlin("plugin.spring") version kotlinVersion
@@ -27,6 +28,7 @@ allprojects{
     apply(plugin = "org.springframework.boot")
     apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
     apply(plugin = "io.spring.dependency-management")
+    apply(plugin = "com.google.cloud.tools.jib")
     repositories{
         mavenCentral()
     }
@@ -43,6 +45,24 @@ subprojects{
         }
     }
     dependencies {
+        if (name == "mealmate-api") {
+            jib {
+                from {
+                    image = "openjdk:17"
+                }
+                to {
+                    image = "${System.getenv("DOCKER_USERNAME")}/mealmate-0.0.1-api-snapshot"
+                    auth {
+                        username = System.getenv("DOCKER_USERNAME")
+                        password = System.getenv("DOCKER_TOKEN")
+                    }
+                }
+                container {
+                    ports = listOf("8080")
+                    mainClass = "io.junseok.mealmateapi.MealmateApiApplication"
+                }
+            }
+        }
         if (name!="mealmate-common"){
             implementation(project(":mealmate-common"))
         }

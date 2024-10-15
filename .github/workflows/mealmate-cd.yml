@@ -62,17 +62,14 @@ jobs:
           distribution: 'temurin'
       - uses: actions/checkout@v2
 
-      - name: docker build
+      - name: JIB Build and Push
         run: |
           chmod +x gradlew
-          ./gradlew clean --stacktrace
-          ./gradlew :mealmate-api:build
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-          echo "git will pull origin : [${{ needs.env.outputs.branch }}]"
-          echo "git checkout finish"
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/mealmate-0.0.1-api-snapshot -f mealmate-api/Dockerfile .
-          echo "docker build finish"        
-          docker push ${{ secrets.DOCKER_USERNAME }}/mealmate-0.0.1-api-snapshot
+          ./gradlew clean jib --stacktrace
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+
 
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.8
