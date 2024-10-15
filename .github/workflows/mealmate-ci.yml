@@ -22,7 +22,9 @@ jobs:
       run: chmod +x gradlew
         
     - name: Build mealmate-api
-      run: ./gradlew :mealmate-api:clean build --stacktrace
+      run: |
+        ./gradlew :mealmate-api:clean --stacktrace
+        ./gradlew :mealmate-api:build --stacktrace
       
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
