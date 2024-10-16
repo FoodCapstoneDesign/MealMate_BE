@@ -82,16 +82,18 @@ subprojects {
 
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         kapt("org.springframework.boot:spring-boot-configuration-processor")
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
-        testImplementation("org.springframework.security:spring-security-test")
-        testImplementation("io.mockk:mockk:${mockkVersion}")
-        testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
         compileOnly("org.projectlombok:lombok")
         implementation("org.springframework.boot:spring-boot-starter-validation")
         implementation("io.github.microutils:kotlin-logging:3.0.5")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
         implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+        //test
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("org.springframework.security:spring-security-test")
+        testImplementation("io.mockk:mockk:${mockkVersion}")
+        testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     }
 
     tasks {
