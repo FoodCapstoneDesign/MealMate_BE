@@ -45,14 +45,14 @@ subprojects {
     if (name == "mealmate-api") {
         apply(plugin = "com.google.cloud.tools.jib")
 
-        tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+       /* tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
             enabled = true
             mainClass.set("io.junseok.mealmateapi.MealmateApiApplicationKt")
-        }
+        }*/
 
-        tasks.getByName<Jar>("jar") {
+        /*tasks.getByName<Jar>("jar") {
             enabled = false
-        }
+        }*/
 
         jib {
             from {
