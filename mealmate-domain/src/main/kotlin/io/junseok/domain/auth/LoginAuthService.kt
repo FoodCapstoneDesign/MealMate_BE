@@ -7,5 +7,5 @@ import org.springframework.stereotype.Component
 class LoginAuthService(
     private val memberRepository: MemberRepository
 ) {
-    fun isExistEmail(email: String) = memberRepository.existsByEmail(email)
+    fun findMemberByEmail(email: String) = memberRepository.findByEmail(email)
 }

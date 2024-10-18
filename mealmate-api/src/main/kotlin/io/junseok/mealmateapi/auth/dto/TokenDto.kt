@@ -1,5 +1,6 @@
 package io.junseok.mealmateapi.auth.dto
 
 data class TokenDto(
-    val token: String
+    val token: String,
+    val authority: String
 )

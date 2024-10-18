@@ -2,6 +2,7 @@ dependencies {
     implementation(project(":mealmate-domain"))
     implementation(project(":mealmate-storage"))
     implementation(project(":mealmate-common"))
+    runtimeOnly(project(":mealmate-admin-api"))
     implementation("org.springframework.boot:spring-boot-starter-web")
 
     //security
