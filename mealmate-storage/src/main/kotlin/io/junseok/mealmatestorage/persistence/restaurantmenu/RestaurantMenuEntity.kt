@@ -21,4 +21,8 @@ class RestaurantMenuEntity(
     @JoinColumn(name = "restaurant_id")
     val restaurant: RestaurantEntity
 ) {
+    fun update(menuName: String, menuPrice: String){
+        this.menuName = menuName
+        this.menuPrice = menuPrice
+    }
 }

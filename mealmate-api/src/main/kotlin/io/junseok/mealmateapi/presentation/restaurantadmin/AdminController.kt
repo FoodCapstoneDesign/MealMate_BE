@@ -1,10 +1,10 @@
-package io.junseok.mealmateadminapi.presentation
+package io.junseok.mealmateapi.presentation.restaurantadmin
 
-import io.junseok.mealmateadminapi.auth.service.AdminAuthService
-import io.junseok.mealmateadminapi.auth.dto.LoginDto
-import io.junseok.mealmateadminapi.domain.AdminService
-import io.junseok.mealmateadminapi.presentation.dto.request.AdminRequest
-import io.junseok.mealmateadminapi.presentation.dto.request.AdminRequest.Companion.toDomain
+import io.junseok.domain.restaurantadmin.AdminService
+import io.junseok.mealmateapi.auth.LoginAdminAuth
+import io.junseok.mealmateapi.auth.dto.LoginDto
+import io.junseok.mealmateapi.presentation.restaurantadmin.dto.request.AdminRequest
+import io.junseok.mealmateapi.presentation.restaurantadmin.dto.request.AdminRequest.Companion.toDomain
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
@@ -14,7 +14,7 @@ import java.security.Principal
 @RequestMapping("/api/admin")
 class AdminController(
     private val adminService: AdminService,
-    private val loginAuthService: AdminAuthService
+    private val loginAdminAuth: LoginAdminAuth
 
 ) {
     @PostMapping("/signup")
@@ -30,7 +30,7 @@ class AdminController(
 
     @PostMapping("/login")
     fun authorize(@RequestBody loginDto: LoginDto) =
-        loginAuthService.login(loginDto).also {
+        loginAdminAuth.login(loginDto).also {
             ResponseEntity.ok(it)
         }
 }

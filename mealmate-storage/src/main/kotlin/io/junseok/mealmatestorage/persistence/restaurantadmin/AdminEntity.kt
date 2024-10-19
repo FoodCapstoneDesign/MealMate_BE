@@ -1,4 +1,4 @@
-package io.junseok.mealmateadminapi.domain
+package io.junseok.mealmatestorage.persistence.restaurantadmin
 
 import javax.persistence.*
 

@@ -12,10 +12,11 @@ import org.springframework.transaction.annotation.Transactional
 @Repository
 class MemberEntityRepository(
     private val memberJpaRepository: MemberJpaRepository,
-): MemberRepository {
+) : MemberRepository {
     @Transactional(readOnly = true)
     override fun findByEmail(email: String) =
-        memberJpaRepository.findByEmail(email).toDomain()
+        memberJpaRepository.findByEmail(email)?.toDomain()
+            ?: throw MealMateException(ErrorCode.NOT_EXIST_MEMBER)
 
     @Transactional
     override fun save(memberSignUp: MemberSignUp): Long {
@@ -23,7 +24,7 @@ class MemberEntityRepository(
     }
 
     @Transactional(readOnly = true)
-    override fun findById(memberId: Long): Member{
+    override fun findById(memberId: Long): Member {
         val memberEntity = memberJpaRepository.findByIdOrNull(memberId)
             ?: throw MealMateException(ErrorCode.NOT_EXIST_MEMBER)
         return memberEntity.toDomain()
@@ -42,12 +43,12 @@ class MemberEntityRepository(
     @Transactional
     override fun delete(email: String) {
         val memberEntity = memberJpaRepository.findByEmail(email)
+            ?: throw MealMateException(ErrorCode.NOT_EXIST_MEMBER)
         memberJpaRepository.delete(memberEntity)
     }
 
     @Transactional
-    override fun update(member: Member) {
-        val memberEntity = memberJpaRepository.findByEmail(member.email)
-        memberEntity.updatePassword(member.password)
-    }
+    override fun update(member: Member) = memberJpaRepository.findByEmail(member.email)
+            ?.updatePassword(member.password)
+            ?: throw MealMateException(ErrorCode.NOT_EXIST_MEMBER)
 }

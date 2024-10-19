@@ -1,6 +1,6 @@
-package io.junseok.mealmateadminapi.presentation.dto.request
+package io.junseok.mealmateapi.presentation.restaurantadmin.dto.request
 
-import io.junseok.mealmateadminapi.domain.Admin
+import io.junseok.domain.restaurantadmin.Admin
 import io.junseok.toEncrypt
 
 data class AdminRequest(
@@ -9,7 +9,7 @@ data class AdminRequest(
     val password: String
 ){
     companion object{
-        fun AdminRequest.toDomain()=Admin(
+        fun AdminRequest.toDomain()= Admin(
             email = this.email,
             restaurantName= this.restaurantName,
             password = this.password.toEncrypt(),

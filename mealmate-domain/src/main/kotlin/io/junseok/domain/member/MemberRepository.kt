@@ -1,7 +1,7 @@
 package io.junseok.domain.member
 
 interface MemberRepository {
-    fun findByEmail(email: String): Member
+    fun findByEmail(email: String): Member?
     fun save(memberSignUp: MemberSignUp): Long
     fun findById(memberId: Long): Member
     fun findOneWithAuthoritiesByEmail(email: String): Member?

@@ -1,4 +1,4 @@
-package io.junseok.mealmateadminapi.domain
+package io.junseok.domain.restaurantadmin
 
 data class Admin(
     val email: String,

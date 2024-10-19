@@ -7,4 +7,5 @@ interface RestaurantMenuRepository {
     fun saveAll(register: RestaurantMenuRegister)
     fun deleteById(restaurantMenuId: Long)
     fun findAllByRestaurant(restaurant: Restaurant): List<RestaurantMenu>
+    fun update(restaurantMenuId: Long, restaurantMenu: RestaurantMenu)
 }

@@ -8,5 +8,9 @@ import org.springframework.stereotype.Component
 class RestaurantMenuReader(
     private val restaurantMenuRepository: RestaurantMenuRepository
 ) {
-    fun findAllMenu(restaurant: Restaurant) = restaurantMenuRepository.findAllByRestaurant(restaurant)
+    fun findAllMenu(restaurant: Restaurant) =
+        restaurantMenuRepository.findAllByRestaurant(restaurant)
+
+    fun findMenu(restaurantMenuId: Long) =
+        restaurantMenuRepository.findById(restaurantMenuId)
 }

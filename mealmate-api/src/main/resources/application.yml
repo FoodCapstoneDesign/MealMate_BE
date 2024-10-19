@@ -6,7 +6,6 @@ spring:
       - common
       - domain
       - storage
-      - admin
 
 jwt:
   header: ${JWT_HEADER}
