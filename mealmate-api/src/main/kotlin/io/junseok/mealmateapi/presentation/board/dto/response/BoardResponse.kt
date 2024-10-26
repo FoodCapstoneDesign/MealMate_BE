@@ -17,7 +17,7 @@ data class BoardResponse(
     companion object {
         fun Board.fromBoard() = BoardResponse(
             title = this.title,
-            content = this.title,
+            content = this.content,
             nickname = this.member!!.nickname,
             lastTime = this.lastTime!!,
             modifyDt = this.modifyDt!!,
