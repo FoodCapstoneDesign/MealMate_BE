@@ -3,6 +3,7 @@ package io.junseok.mealmatestorage.persistence.note
 import io.junseok.mealmatestorage.persistence.base.BaseTimeEntity
 import io.junseok.mealmatestorage.persistence.member.MemberEntity
 import io.junseok.mealmatestorage.persistence.noteroom.NoteRoomEntity
+import io.junseok.mealmatestorage.persistence.noteroommember.NoteRoomMemberEntity
 import javax.persistence.*
 
 @Entity
@@ -25,7 +26,7 @@ class NoteEntity(
     val receiverMember: MemberEntity,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "note_members")
+    @JoinColumn(name = "note_room")
     val noteRoom: NoteRoomEntity
 ) :BaseTimeEntity() {
 

@@ -1,7 +1,9 @@
 package io.junseok.mealmateapi.presentation.noteroom
 
-import io.junseok.domain.noteroom.NoteRoomService
+import io.junseok.domain.noteroommember.NoteRoomMemberService
 import io.junseok.mealmateapi.presentation.noteroom.dto.request.NoteRoomRequest
+import io.junseok.mealmateapi.presentation.noteroom.dto.response.NoteRoomResponse
+import io.junseok.mealmateapi.presentation.noteroom.dto.response.NoteRoomResponse.Companion.toNoteRoomResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -18,7 +20,7 @@ import java.security.Principal
 @CrossOrigin
 @RequestMapping("/api/noteroom")
 class NoteRoomController(
-    private val noteRoomService: NoteRoomService,
+    private val noteRoomMemberService: NoteRoomMemberService,
 ) {
     /**
      * TODO
@@ -30,7 +32,7 @@ class NoteRoomController(
         principal: Principal,
     ): ResponseEntity<Long> =
         ResponseEntity.status(HttpStatus.CREATED).body(
-            noteRoomService.generateRoom(noteRoomRequest.opponentId, principal.name)
+            noteRoomMemberService.generateRoom(noteRoomRequest.opponentId, principal.name)
         );
 
     /**
@@ -39,7 +41,7 @@ class NoteRoomController(
      */
     @DeleteMapping
     fun goOutRoom(principal: Principal): ResponseEntity<Unit> {
-        noteRoomService.deleteRoom(principal.name)
+        noteRoomMemberService.deleteRoom(principal.name)
         return ResponseEntity.ok().build()
     }
 
@@ -52,4 +54,12 @@ class NoteRoomController(
     fun getNoteRoom(@PathVariable noteRoomId: Long, principal: Principal) {
 
     }
+
+    /**
+     * TODO
+     * 쪽지방 목록 불러오기
+     */
+    @GetMapping("/list")
+    fun showAllNoteRoom(principal: Principal): ResponseEntity<List<NoteRoomResponse>> =
+        ResponseEntity.ok(noteRoomMemberService.getRoomList(principal.name).map{it.toNoteRoomResponse()})
 }

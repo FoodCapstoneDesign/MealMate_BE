@@ -3,6 +3,10 @@ package io.junseok.domain.noteroom
 import org.springframework.stereotype.Component
 
 @Component
-class NoteRoomCreator(private val roomRepository: NoteRoomRepository) {
-    fun create(noteRoom: NoteRoom): Long = roomRepository.save(noteRoom)
+class NoteRoomCreator(
+    private val noteRoomRepository: NoteRoomRepository
+) {
+    fun create(nickName: String):NoteRoom =
+        noteRoomRepository.save(nickName)
+
 }
