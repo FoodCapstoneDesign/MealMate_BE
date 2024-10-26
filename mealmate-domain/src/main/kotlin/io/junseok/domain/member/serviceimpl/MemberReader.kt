@@ -11,4 +11,6 @@ class MemberReader(
 ) {
     fun findMember(email: String) = memberRepository.findByEmail(email)
         ?: throw MealMateException(ErrorCode.NOT_EXIST_MEMBER)
+
+    fun findMemberById(memberId: Long) = memberRepository.findById(memberId)
 }
