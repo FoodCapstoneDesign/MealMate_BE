@@ -14,5 +14,5 @@ fun NoteRoomMemberEntity.toNoteRoomInfo()=NoteRoomMemberInfo(
 fun NoteRoomMember.toEntity() = NoteRoomMemberEntity(
     principalEntity = this.principal.toEntity(),
     noteRoomEntity = this.noteRoom.toEntity(),
-    roomName = this.noteRoom.nickname
+    roomName = this.opponent.nickname
 )
