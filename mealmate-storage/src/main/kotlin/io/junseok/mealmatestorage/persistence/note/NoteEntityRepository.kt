@@ -1,9 +1,11 @@
 package io.junseok.mealmatestorage.persistence.note
 
+import io.junseok.domain.member.Member
 import io.junseok.domain.note.Note
 import io.junseok.domain.note.NoteInfo
 import io.junseok.domain.note.NoteRepository
 import io.junseok.domain.noteroom.NoteRoom
+import io.junseok.domain.noteroommember.NoteRoomMemberInfo
 import io.junseok.mealmatestorage.persistence.noteroom.toEntity
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
@@ -20,5 +22,11 @@ class NoteEntityRepository(
     override fun findByNoteRoom(noteRoom: NoteRoom): List<NoteInfo> =
         noteJpaRepository.findAllByNoteRoom(noteRoom.toEntity())
             .map { it.toDomain() }
+
+    @Transactional(readOnly = true)
+    override fun findAllByNoteRoomForLastNote(noteRoom: NoteRoom): NoteRoomMemberInfo {
+        return noteJpaRepository.findTopByNoteRoomOrderByCreateDtDesc(noteRoom.toEntity())
+            .toNoteRoomMember()
+    }
 
 }

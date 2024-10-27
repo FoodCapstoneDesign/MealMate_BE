@@ -11,6 +11,6 @@ class NoteRoomEntity(
     var noteRoomId:Long?=null,
 
     @Column(name = "creator")
-    val nickName: String
+    val creator: String
 ) {
 }

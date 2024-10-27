@@ -1,6 +1,7 @@
 package io.junseok.mealmatestorage.persistence.noteroommember
 
 import io.junseok.domain.member.Member
+import io.junseok.domain.noteroom.NoteRoom
 import io.junseok.domain.noteroommember.NoteRoomMember
 import io.junseok.domain.noteroommember.NoteRoomMemberInfo
 import io.junseok.domain.noteroommember.NoteRoomMemberRepository
@@ -22,8 +23,8 @@ class NoteRoomMemberEntityMemberRepository(
         noteRoomMemberJpaRepository.deleteByPrincipalEntity(member.toEntity())
 
     @Transactional(readOnly = true)
-    override fun findAllByMember(member: Member): List<NoteRoomMemberInfo> =
+    override fun findAllByMember(member: Member): List<NoteRoom> =
         noteRoomMemberJpaRepository.findAllByPrincipalEntity(member.toEntity())
-            .map { it.toNoteRoomInfo() }
+            .map { it.toNoteRoom() }
 
 }

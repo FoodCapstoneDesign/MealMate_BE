@@ -45,5 +45,6 @@ class NoteRoomController(
     @GetMapping("/list")
     fun showAllNoteRoom(principal: Principal): ResponseEntity<List<NoteRoomResponse>> =
         ResponseEntity.ok(
-            noteRoomMemberService.getRoomList(principal.name).map { it.toNoteRoomResponse() })
+            noteRoomMemberService.getRoomList(principal.name).map { it.toNoteRoomResponse() }
+        )
 }
