@@ -2,6 +2,7 @@ package io.junseok.mealmatestorage.persistence.note
 
 import io.junseok.domain.note.Note
 import io.junseok.domain.note.NoteInfo
+import io.junseok.domain.noteroom.NoteRoom
 import io.junseok.domain.noteroommember.NoteRoomMemberInfo
 import io.junseok.mealmatestorage.persistence.member.toEntity
 import io.junseok.mealmatestorage.persistence.noteroom.toEntity
@@ -20,8 +21,8 @@ fun NoteEntity.toDomain()=NoteInfo(
     email = this.senderMember.email
 )
 
-fun NoteEntity.toNoteRoomMember()=NoteRoomMemberInfo(
-    roomName = this.noteRoom.creator,
+fun NoteEntity.toNoteRoomMember(noteRoom: NoteRoom)=NoteRoomMemberInfo(
+    roomName = noteRoom.creator,
     message = this.noteMessage,
     sendDt = this.createDt!!
 )

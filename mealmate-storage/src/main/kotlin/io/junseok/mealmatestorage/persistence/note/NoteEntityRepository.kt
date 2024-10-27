@@ -26,7 +26,7 @@ class NoteEntityRepository(
     @Transactional(readOnly = true)
     override fun findAllByNoteRoomForLastNote(noteRoom: NoteRoom): NoteRoomMemberInfo {
         return noteJpaRepository.findTopByNoteRoomOrderByCreateDtDesc(noteRoom.toEntity())
-            .toNoteRoomMember()
+            .toNoteRoomMember(noteRoom)
     }
 
 }
