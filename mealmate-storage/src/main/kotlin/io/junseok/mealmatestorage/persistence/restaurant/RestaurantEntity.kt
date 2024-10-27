@@ -43,4 +43,7 @@ class RestaurantEntity(
     @Column(name = "close_at")
     val closeAt: String
 ) {
+    fun addLikeCount(){
+        this.likeCount++
+    }
 }

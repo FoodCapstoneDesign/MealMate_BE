@@ -48,4 +48,8 @@ class RestaurantEntityRepository(
         restaurantJpaRepository.findByRestaurantNameContains(restaurantName).map {
             it?.toDomain() ?: throw MealMateException(ErrorCode.NOT_EXIST_RESTAURANT)
         }
+
+    @Transactional
+    override fun updateLikeCount(restaurant: Restaurant) = restaurant.toEntity().addLikeCount()
+
 }
