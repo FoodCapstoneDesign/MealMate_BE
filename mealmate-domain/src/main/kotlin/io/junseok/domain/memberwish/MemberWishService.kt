@@ -7,6 +7,7 @@ import io.junseok.domain.memberwish.serviceimpl.MemberWishReader
 import io.junseok.domain.memberwish.serviceimpl.MemberWishValidator
 import io.junseok.domain.restaurant.Restaurant
 import io.junseok.domain.restaurant.serviceimpl.RestaurantReader
+import io.junseok.domain.restaurant.serviceimpl.RestaurantUpdater
 import org.springframework.stereotype.Service
 
 @Service
@@ -16,12 +17,14 @@ class MemberWishService(
     private val memberWishValidator: MemberWishValidator,
     private val memberWishCreator: MemberWishCreator,
     private val memberWishReader: MemberWishReader,
-    private val memberWishDeleter: MemberWishDeleter
+    private val memberWishDeleter: MemberWishDeleter,
+    private val restaurantUpdater: RestaurantUpdater
 ) {
     fun createWishList(restaurantId: Long, email: String): Long {
         val member = memberReader.findMember(email)
         val restaurant = restaurantReader.findById(restaurantId)
         memberWishValidator.validWishList(member, restaurant)
+        restaurantUpdater.increaseLikeCount(restaurant)
         return memberWishCreator.create(
             MemberWish(
                 member = member,

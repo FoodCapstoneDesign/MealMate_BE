@@ -11,20 +11,11 @@ class NoteRoomMemberProcessor(
 ) {
     fun createTwoRoom(member: Member, opponent: Member): Long {
         val noteRoom = noteRoomCreator.create(member.nickname)
-        val myRoodId = noteRoomMemberCreator.create(
-            NoteRoomMember(
-                principal = member,
-                opponent = opponent,
-                noteRoom = noteRoom
-            )
+        val roomMembers = listOf(
+            NoteRoomMember(principal = member, opponent = opponent, noteRoom = noteRoom),
+            NoteRoomMember(principal = opponent, opponent = member, noteRoom = noteRoom)
         )
-        noteRoomMemberCreator.create(
-            NoteRoomMember(
-                principal = opponent,
-                opponent = member,
-                noteRoom = noteRoom
-            )
-        )
-        return myRoodId
+        roomMembers.forEach{noteRoomMemberCreator.create(it)}
+        return roomMembers.first().noteRoom.roomId!!
     }
 }

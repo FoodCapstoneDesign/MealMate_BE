@@ -8,7 +8,7 @@ class NoteRoomMemberService(
     private val memberReader: MemberReader,
     private val noteRoomMemberProcessor: NoteRoomMemberProcessor,
     private val noteRoomMemberDeleter: NoteRoomMemberDeleter,
-    private val noteRoomMemberReader: NoteRoomMemberReader
+    private val noteRoomMemberReader: NoteRoomMemberReader,
 ) {
     fun generateRoom(opponentId: Long, email: String): Long {
         val member = memberReader.findMember(email)

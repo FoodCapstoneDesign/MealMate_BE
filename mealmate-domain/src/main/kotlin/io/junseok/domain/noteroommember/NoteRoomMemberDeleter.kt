@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class NoteRoomMemberDeleter(
-    private val noteRoomMemberRepository: NoteRoomMemberRepository
+    private val noteRoomMemberRepository: NoteRoomMemberRepository,
 ) {
     fun delete(member: Member) = noteRoomMemberRepository.delete(member)
 }
