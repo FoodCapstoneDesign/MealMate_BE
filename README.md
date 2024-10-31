@@ -31,7 +31,8 @@
 ---
 
 ## DB구조도
-![image](https://github.com/user-attachments/assets/618f7ea4-5151-488a-9410-f1fc29550824)
+![image](https://github.com/user-attachments/assets/7b2c42b9-4f91-48ca-941a-280687f25015)
+
 
 
 
