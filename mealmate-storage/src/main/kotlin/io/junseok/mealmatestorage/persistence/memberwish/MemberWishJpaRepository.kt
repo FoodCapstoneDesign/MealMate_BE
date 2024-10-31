@@ -8,4 +8,5 @@ interface MemberWishJpaRepository : JpaRepository<MemberWishEntity,Long> {
     fun existsByRestaurantAndMember(restaurantEntity: RestaurantEntity,memberEntity: MemberEntity): Boolean
     fun findAllByMember(memberEntity: MemberEntity):List<MemberWishEntity>
     fun countByMember(memberEntity: MemberEntity): Int
+    fun deleteByRestaurant(restaurantEntity: RestaurantEntity)
 }

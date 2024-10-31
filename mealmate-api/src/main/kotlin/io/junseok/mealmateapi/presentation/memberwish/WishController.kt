@@ -34,12 +34,12 @@ class WishController(
         memberWishService.findWishList(principal.name,restaurantId)
     )
 
-    @DeleteMapping("/{wishlistId}")
+    @DeleteMapping("/{restaurantId}")
     fun deleteWishList(
-        @PathVariable wishlistId: Long,
+        @PathVariable restaurantId: Long,
         principal: Principal
     ): ResponseEntity<Unit> {
-        memberWishService.removeWishList(wishlistId)
+        memberWishService.removeWishList(restaurantId)
         return ResponseEntity.ok().build()
     }
 

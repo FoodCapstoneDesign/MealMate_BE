@@ -44,8 +44,9 @@ class MemberWishService(
         return memberWishValidator.isExistWishList(member, restaurant)
     }
 
-    fun removeWishList(wishlistId: Long){
-        memberWishDeleter.delete(wishlistId)
+    fun removeWishList(restaurantId: Long){
+        val restaurant = restaurantReader.findById(restaurantId)
+        memberWishDeleter.delete(restaurant)
     }
     fun showWishListCount(email: String) = memberWishReader.getWishListCount(email)
 }

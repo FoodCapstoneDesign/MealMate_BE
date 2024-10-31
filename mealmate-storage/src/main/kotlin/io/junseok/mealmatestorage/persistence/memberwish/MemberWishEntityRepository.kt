@@ -25,8 +25,8 @@ class MemberWishEntityRepository(
         memberWishJpaRepository.findAllByMember(member.toEntity()).map { it.toDomain() }
 
     @Transactional
-    override fun deleteById(memberWishId: Long) {
-        memberWishJpaRepository.deleteById(memberWishId)
+    override fun deleteByRestaurant(restaurant: Restaurant) {
+        memberWishJpaRepository.deleteByRestaurant(restaurant.toEntity())
     }
 
     @Transactional(readOnly = true)
