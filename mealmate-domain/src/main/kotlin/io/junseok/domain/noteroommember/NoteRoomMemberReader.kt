@@ -2,7 +2,6 @@ package io.junseok.domain.noteroommember
 
 import io.junseok.domain.member.serviceimpl.MemberReader
 import io.junseok.domain.note.NoteReader
-import io.junseok.domain.noteroom.NoteRoomReader
 import org.springframework.stereotype.Component
 
 @Component

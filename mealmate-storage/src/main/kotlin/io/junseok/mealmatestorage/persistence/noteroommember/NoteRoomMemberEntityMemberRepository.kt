@@ -9,11 +9,12 @@ import io.junseok.mealmatestorage.persistence.member.toEntity
 import io.junseok.mealmatestorage.persistence.note.toEntity
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Repository
 class NoteRoomMemberEntityMemberRepository(
-    private val noteRoomMemberJpaRepository: NoteRoomMemberJpaRepository
-): NoteRoomMemberRepository {
+    private val noteRoomMemberJpaRepository: NoteRoomMemberJpaRepository,
+) : NoteRoomMemberRepository {
     @Transactional
     override fun save(noteRoomMember: NoteRoomMember): Long =
         noteRoomMemberJpaRepository.save(noteRoomMember.toEntity()).noteMembersId!!
@@ -27,4 +28,12 @@ class NoteRoomMemberEntityMemberRepository(
         noteRoomMemberJpaRepository.findAllByPrincipalEntity(member.toEntity())
             .map { it.toNoteRoom() }
 
+    @Transactional(readOnly = true)
+    override fun existByNoteRoom(owned: Member, opponent: Member): Long? =
+        noteRoomMemberJpaRepository.findByPrincipalEntityAndRoomName(
+            owned.toEntity(),
+            opponent.nickname,
+            opponent.toEntity(),
+            owned.nickname
+        ).map { it.noteRoomEntity.noteRoomId }.orElse(null)
 }

@@ -9,17 +9,20 @@ class NoteRoomMemberService(
     private val noteRoomMemberProcessor: NoteRoomMemberProcessor,
     private val noteRoomMemberDeleter: NoteRoomMemberDeleter,
     private val noteRoomMemberReader: NoteRoomMemberReader,
+    private val noteRoomMemberValidator: NoteRoomMemberValidator,
 ) {
     fun generateRoom(opponentId: Long, email: String): Long {
         val member = memberReader.findMember(email)
         val opponent = memberReader.findMemberById(opponentId)
-        return noteRoomMemberProcessor.createTwoRoom(member,opponent)
+        return noteRoomMemberValidator.isExistNoteRoom(member, opponent).takeIf { it != null }
+            ?: noteRoomMemberProcessor.createTwoRoom(member, opponent)
     }
 
-    fun deleteRoom(email: String){
+    fun deleteRoom(email: String) {
         val member = memberReader.findMember(email)
         noteRoomMemberDeleter.delete(member)
     }
 
-    fun getRoomList(email: String): List<NoteRoomMemberInfo> = noteRoomMemberReader.findNoteRooms(email)
+    fun getRoomList(email: String): List<NoteRoomMemberInfo> =
+        noteRoomMemberReader.findNoteRooms(email)
 }

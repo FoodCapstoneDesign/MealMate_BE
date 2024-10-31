@@ -7,4 +7,5 @@ interface NoteRoomMemberRepository {
     fun save(noteRoomMember: NoteRoomMember): Long
     fun delete(member: Member)
     fun findAllByMember(member: Member):List<NoteRoom>
+    fun existByNoteRoom(owned: Member, opponent:Member): Long?
 }
