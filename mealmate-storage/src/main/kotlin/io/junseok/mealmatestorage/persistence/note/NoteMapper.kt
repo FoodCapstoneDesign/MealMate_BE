@@ -22,6 +22,7 @@ fun NoteEntity.toDomain()=NoteInfo(
 )
 
 fun NoteEntity.toNoteRoomMember(noteRoom: NoteRoom)=NoteRoomMemberInfo(
+    noteRoomId = noteRoom.roomId!!,
     roomName = noteRoom.creator,
     message = this.noteMessage,
     sendDt = this.createDt!!
