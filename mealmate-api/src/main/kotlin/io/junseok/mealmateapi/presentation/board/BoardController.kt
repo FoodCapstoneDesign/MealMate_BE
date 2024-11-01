@@ -39,8 +39,9 @@ class BoardController(
     fun boardList(
         @RequestParam(value = "page") page: Int,
         @RequestParam(value = "size") size: Int,
+        @RequestParam(value = "department", required = false) department: String
     ): ResponseEntity<Page<BoardResponse>> =
-        ResponseEntity.ok(boardService.showBoardList(page, size).fromBoardByPaging())
+        ResponseEntity.ok(boardService.showBoardList(page, size,department).fromBoardByPaging())
 
 
     /**

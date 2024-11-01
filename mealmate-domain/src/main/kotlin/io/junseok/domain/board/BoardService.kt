@@ -20,8 +20,8 @@ class BoardService(
         email: String,
     ): Long = boardCreator.create(board, restaurantId, email)
 
-    fun showBoardList(page: Int, size: Int): Page<Board> =
-        boardReader.findBoardList(page,size)
+    fun showBoardList(page: Int, size: Int, department: String): Page<Board> =
+        boardReader.findBoardList(page,size,department)
 
     fun getBoard(boardId: Long) = boardReader.findBoard(boardId)
 

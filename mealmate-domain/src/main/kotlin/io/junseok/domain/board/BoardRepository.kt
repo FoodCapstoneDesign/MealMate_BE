@@ -5,7 +5,7 @@ import io.junseok.page.Page
 
 interface BoardRepository {
     fun save(board: Board): Long
-    fun findAllByOrderByCreateDtDesc(page: Int, size: Int): Page<Board>
+    fun findAllByOrderByCreateDtDesc(page: Int, size: Int, department: String): Page<Board>
     fun findById(boardId: Long): Board
     fun deleteById(boardId: Long)
     fun update(boardId: Long, board: Board): Long

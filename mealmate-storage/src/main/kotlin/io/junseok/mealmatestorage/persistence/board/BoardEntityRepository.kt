@@ -15,14 +15,24 @@ import org.springframework.transaction.annotation.Transactional
 @Repository
 class BoardEntityRepository(
     private val boardEntityJpaRepository: BoardEntityJpaRepository,
+    private val boardQueryRepository: BoardQueryRepository
 ) : BoardRepository {
     @Transactional
     override fun save(board: Board): Long =
         boardEntityJpaRepository.save(board.toEntity()).boardId!!
 
+    /**
+     * TODO
+     * QuesyDsl로 의존변경
+     */
     @Transactional(readOnly = true)
-    override fun findAllByOrderByCreateDtDesc(page: Int, size: Int): Page<Board> =
-        boardEntityJpaRepository.findAllByOrderByCreateDtDesc(PageRequest.of(page,size)).toDomainByPaging()
+    override fun findAllByOrderByCreateDtDesc(
+        page: Int,
+        size: Int,
+        department: String,
+    ): Page<Board> =
+        boardQueryRepository.findAllByOrderByCreateDtDesc(PageRequest.of(page, size),department)
+            .toDomainByPaging()
 
     @Transactional(readOnly = true)
     override fun findById(boardId: Long) =
@@ -39,12 +49,13 @@ class BoardEntityRepository(
         return boardId
     }
 
+    @Transactional(readOnly = true)
     override fun findAllByRestaurantOrderByCreateDtDesc(
         page: Int,
         size: Int,
         restaurant: Restaurant,
     ): Page<Board> =
         boardEntityJpaRepository.findAllByRestaurantOrderByCreateDtDesc(
-            PageRequest.of(page, size),restaurant.toEntity()
+            PageRequest.of(page, size), restaurant.toEntity()
         ).toDomainByPaging()
 }

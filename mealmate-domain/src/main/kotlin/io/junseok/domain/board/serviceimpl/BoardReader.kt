@@ -11,8 +11,8 @@ class BoardReader(
     private val boardRepository: BoardRepository,
     private val restaurantReader: RestaurantReader
     ) {
-    fun findBoardList(page: Int, size:Int): Page<Board> =
-        boardRepository.findAllByOrderByCreateDtDesc(page,size)
+    fun findBoardList(page: Int, size:Int, department: String): Page<Board> =
+        boardRepository.findAllByOrderByCreateDtDesc(page,size, department)
 
     fun findBoard(boardId: Long) = boardRepository.findById(boardId)
 
