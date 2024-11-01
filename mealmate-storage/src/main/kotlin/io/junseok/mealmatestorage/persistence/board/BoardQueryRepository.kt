@@ -22,6 +22,7 @@ class BoardQueryRepository(
             .where(departmentLike(department))
             .offset(pageable.offset)
             .limit(pageable.pageSize.toLong())
+            .orderBy(boardEntity.createDt.desc())
 
         val content = boardList.fetch()
 
