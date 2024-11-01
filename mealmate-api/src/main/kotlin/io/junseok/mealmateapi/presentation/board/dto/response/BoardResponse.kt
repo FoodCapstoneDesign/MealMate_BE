@@ -13,7 +13,8 @@ data class BoardResponse(
     val modifyDt: LocalDateTime,
     val boardId: Long,
     val email: String,
-    val writerId: Long
+    val writerId: Long,
+    val department: String
 ) {
     companion object {
         fun Board.fromBoard() = BoardResponse(
@@ -24,7 +25,8 @@ data class BoardResponse(
             modifyDt = this.modifyDt!!,
             boardId = this.boardId!!,
             email = this.member!!.email,
-            writerId = this.member!!.memberId
+            writerId = this.member!!.memberId,
+            department = this.member!!.department
         )
 
         fun Page<Board>.fromBoardByPaging(): Page<BoardResponse> {
