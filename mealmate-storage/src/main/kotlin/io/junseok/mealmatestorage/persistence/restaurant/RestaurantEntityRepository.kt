@@ -50,6 +50,8 @@ class RestaurantEntityRepository(
         }
 
     @Transactional
-    override fun updateLikeCount(restaurant: Restaurant) = restaurant.toEntity().addLikeCount()
-
+    override fun updateLikeCount(restaurant: Restaurant) =
+        restaurantJpaRepository.findByIdOrNull(restaurant.restaurantId!!)
+            ?.addLikeCount()
+            ?: throw MealMateException(ErrorCode.NOT_EXIST_RESTAURANT)
 }
