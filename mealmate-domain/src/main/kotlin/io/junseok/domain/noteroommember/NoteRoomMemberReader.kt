@@ -1,7 +1,9 @@
 package io.junseok.domain.noteroommember
 
+import io.junseok.domain.member.Member
 import io.junseok.domain.member.serviceimpl.MemberReader
 import io.junseok.domain.note.NoteReader
+import io.junseok.domain.noteroom.NoteRoom
 import org.springframework.stereotype.Component
 
 @Component
@@ -15,5 +17,11 @@ class NoteRoomMemberReader(
         val roomInfoList =
             noteRoomMemberRepository.findAllByMember(member)
         return noteReader.findNoteByMember(roomInfoList)
+    }
+
+    fun findNoteRoomByMember(noteRoom: NoteRoom, member: Member):Long {
+        val opponentNickname =
+            noteRoomMemberRepository.findByNoteRoomAndMember(noteRoom, member)
+        return memberReader.findMemberByNickname(opponentNickname)
     }
 }

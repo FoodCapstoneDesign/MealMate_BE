@@ -5,7 +5,7 @@ import io.junseok.domain.noteroommember.NoteRoomMemberInfo
 
 interface NoteRepository {
     fun save(note: Note): Long?
-    fun findByNoteRoom(noteRoom: NoteRoom):List<NoteInfo>
+    fun findByNoteRoom(noteRoom: NoteRoom, opponentId: Long):List<NoteInfo>
 
     fun findAllByNoteRoomForLastNote(noteRoom: NoteRoom):NoteRoomMemberInfo
 }

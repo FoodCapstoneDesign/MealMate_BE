@@ -19,9 +19,9 @@ class NoteEntityRepository(
         noteJpaRepository.save(note.toEntity()).noteId
 
     @Transactional(readOnly = true)
-    override fun findByNoteRoom(noteRoom: NoteRoom): List<NoteInfo> =
+    override fun findByNoteRoom(noteRoom: NoteRoom, opponentId: Long): List<NoteInfo> =
         noteJpaRepository.findAllByNoteRoom(noteRoom.toEntity())
-            .map { it.toDomain() }
+            .map { it.toDomain(opponentId) }
 
     @Transactional(readOnly = true)
     override fun findAllByNoteRoomForLastNote(noteRoom: NoteRoom): NoteRoomMemberInfo {

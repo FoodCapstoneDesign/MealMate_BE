@@ -42,6 +42,9 @@ class NoteController(
      * 쪽지 불러오기
      */
     @GetMapping("/{noteRoomId}")
-    fun getNoteList(@PathVariable noteRoomId: Long): ResponseEntity<List<NoteResponse>> =
-        ResponseEntity.ok(noteService.showAllNotes(noteRoomId).map { it.fromDomain() })
+    fun getNoteList(
+        @PathVariable noteRoomId: Long,
+        principal: Principal,
+    ): ResponseEntity<List<NoteResponse>> =
+        ResponseEntity.ok(noteService.showAllNotes(noteRoomId,principal.name).map { it.fromDomain() })
 }

@@ -8,4 +8,5 @@ interface MemberRepository {
     fun existsByEmail(email: String): Boolean
     fun delete(email: String)
     fun update(member: Member)
+    fun findMemberByNickname(nickname: String): Long
 }

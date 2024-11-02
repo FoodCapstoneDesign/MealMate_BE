@@ -7,6 +7,7 @@ import io.junseok.domain.noteroommember.NoteRoomMemberInfo
 import io.junseok.domain.noteroommember.NoteRoomMemberRepository
 import io.junseok.mealmatestorage.persistence.member.toEntity
 import io.junseok.mealmatestorage.persistence.note.toEntity
+import io.junseok.mealmatestorage.persistence.noteroom.toEntity
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -36,4 +37,11 @@ class NoteRoomMemberEntityMemberRepository(
             opponent.toEntity(),
             owned.nickname
         ).map { it.noteRoomEntity.noteRoomId }.orElse(null)
+
+    @Transactional(readOnly = true)
+    override fun findByNoteRoomAndMember(noteRoom: NoteRoom, member: Member):String =
+        noteRoomMemberJpaRepository.findByPrincipalEntityAndNoteRoomEntity(
+            member.toEntity(),
+            noteRoom.toEntity()
+        ).roomName
 }

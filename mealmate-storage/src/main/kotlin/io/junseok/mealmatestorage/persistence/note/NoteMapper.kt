@@ -15,10 +15,11 @@ fun Note.toEntity()=NoteEntity(
     noteRoom = this.noteRoom!!.toEntity()
 )
 
-fun NoteEntity.toDomain()=NoteInfo(
+fun NoteEntity.toDomain(opponentId: Long)=NoteInfo(
     message = this.noteMessage,
     sendDt = this.createDt!!,
-    email = this.senderMember.email
+    email = this.senderMember.email,
+    opponentId = opponentId
 )
 
 fun NoteEntity.toNoteRoomMember(noteRoom: NoteRoom)=NoteRoomMemberInfo(

@@ -1,6 +1,7 @@
 package io.junseok.mealmatestorage.persistence.noteroommember
 
 import io.junseok.mealmatestorage.persistence.member.MemberEntity
+import io.junseok.mealmatestorage.persistence.noteroom.NoteRoomEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
@@ -24,4 +25,9 @@ interface NoteRoomMemberJpaRepository : JpaRepository<NoteRoomMemberEntity, Long
         @Param(value = "opponent") opponent: MemberEntity,
         @Param(value = "ownedNickname") ownedNickname: String
     ): Optional<NoteRoomMemberEntity>
+
+    fun findByPrincipalEntityAndNoteRoomEntity(
+        memberEntity: MemberEntity,
+        noteRoomEntity: NoteRoomEntity
+    ): NoteRoomMemberEntity
 }

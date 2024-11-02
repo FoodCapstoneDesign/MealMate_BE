@@ -51,4 +51,8 @@ class MemberEntityRepository(
     override fun update(member: Member) = memberJpaRepository.findByEmail(member.email)
             ?.updatePassword(member.password)
             ?: throw MealMateException(ErrorCode.NOT_EXIST_MEMBER)
+
+    @Transactional(readOnly = true)
+    override fun findMemberByNickname(nickname: String): Long =
+        memberJpaRepository.findByNickname(nickname).memberId!!
 }

@@ -5,5 +5,6 @@ import java.time.LocalDateTime
 data class NoteInfo(
     val message: String,
     val sendDt: LocalDateTime,
-    val email: String
+    val email: String,
+    val opponentId: Long?=0
 )
