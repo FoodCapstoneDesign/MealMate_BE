@@ -54,4 +54,11 @@ class RestaurantEntityRepository(
         restaurantJpaRepository.findByIdOrNull(restaurant.restaurantId!!)
             ?.addLikeCount()
             ?: throw MealMateException(ErrorCode.NOT_EXIST_RESTAURANT)
+
+    @Transactional
+    override fun diminishLikeCount(restaurant: Restaurant) {
+        restaurantJpaRepository.findByIdOrNull(restaurant.restaurantId!!)
+            ?.removeLikeCount()
+            ?: throw MealMateException(ErrorCode.NOT_EXIST_RESTAURANT)
+    }
 }

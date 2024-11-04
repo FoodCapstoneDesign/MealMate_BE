@@ -46,4 +46,7 @@ class RestaurantEntity(
     fun addLikeCount(){
         this.likeCount++
     }
+    fun removeLikeCount(){
+        this.likeCount--
+    }
 }

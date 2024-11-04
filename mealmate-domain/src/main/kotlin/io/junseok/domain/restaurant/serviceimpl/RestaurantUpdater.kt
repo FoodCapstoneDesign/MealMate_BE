@@ -6,9 +6,12 @@ import org.springframework.stereotype.Component
 
 @Component
 class RestaurantUpdater(
-    private val restaurantRepository: RestaurantRepository
+    private val restaurantRepository: RestaurantRepository,
 ) {
-    fun increaseLikeCount(restaurant: Restaurant)=
+    fun increaseLikeCount(restaurant: Restaurant) =
         restaurantRepository.updateLikeCount(restaurant)
+
+    fun decreaseLikeCount(restaurant: Restaurant) =
+        restaurantRepository.diminishLikeCount(restaurant)
 
 }
