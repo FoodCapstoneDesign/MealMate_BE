@@ -31,4 +31,7 @@ class BoardService(
 
     fun getBoardByRestaurant(restaurantId: Long,page: Int,size: Int): Page<Board> =
         boardReader.findBoardByRestaurant(restaurantId,page, size)
+
+    fun modifyRecruitment(boardId: Long, email: String) =
+        boardUpdater.recruitmentStatus(boardId,email)
 }

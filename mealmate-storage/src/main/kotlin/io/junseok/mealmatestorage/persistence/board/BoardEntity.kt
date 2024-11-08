@@ -20,6 +20,9 @@ class BoardEntity(
     @Column(name = "content")
     var content: String,
 
+    @Column(name = "is_recruitment")
+    var isRecruitment: Boolean,
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     val member: MemberEntity,
@@ -31,5 +34,9 @@ class BoardEntity(
     fun updateBoard(board: Board) {
         this.title = board.title
         this.content = board.content
+    }
+
+    fun updateRecruitment(isRecruitment: Boolean){
+        this.isRecruitment = isRecruitment
     }
 }

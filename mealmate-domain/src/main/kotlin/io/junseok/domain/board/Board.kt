@@ -7,6 +7,7 @@ import java.time.LocalDateTime
 data class Board(
     val title: String,
     val content: String,
+    val isRecruitment: Boolean?=null,
     val boardId: Long?=null,
     val lastTime: LocalDateTime?=null,
     val modifyDt: LocalDateTime?=null,

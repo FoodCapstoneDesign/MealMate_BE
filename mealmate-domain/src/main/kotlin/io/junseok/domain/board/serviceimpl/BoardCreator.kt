@@ -20,7 +20,8 @@ class BoardCreator(
                 title = board.title,
                 content = board.content,
                 member = member,
-                restaurant = restaurant
+                restaurant = restaurant,
+                isRecruitment = true
             )
         )
     }

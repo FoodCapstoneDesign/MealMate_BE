@@ -12,7 +12,8 @@ fun Board.toEntity() = BoardEntity(
     title = this.title,
     content = this.content,
     member = this.member!!.toEntity(),
-    restaurant = this.restaurant!!.toEntity()
+    restaurant = this.restaurant!!.toEntity(),
+    isRecruitment = this.isRecruitment!!
 )
 
 fun BoardEntity.toDomain() = Board(
@@ -22,7 +23,8 @@ fun BoardEntity.toDomain() = Board(
     lastTime = this.createDt,
     modifyDt = this.modifyDt,
     restaurant = this.restaurant.toDomain(),
-    member = this.member.toDomain()
+    member = this.member.toDomain(),
+    isRecruitment = this.isRecruitment
 )
 
 fun Page<BoardEntity>.toDomainByPaging() = PageImpl(

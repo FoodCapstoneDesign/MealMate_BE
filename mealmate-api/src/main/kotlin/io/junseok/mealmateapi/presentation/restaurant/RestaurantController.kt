@@ -11,6 +11,7 @@ import io.junseok.mealmateapi.presentation.restaurant.dto.response.RestaurantInf
 import io.junseok.mealmateapi.presentation.restaurant.dto.response.RestaurantInfo.Companion.fromRestaurant
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
@@ -21,6 +22,7 @@ class RestaurantController(
     private val restaurantService: RestaurantService,
 ) {
     @PostMapping(value = [""], consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     fun registerRestaurant(
         @RequestPart(value = "imageFile", required = true) imageFile: MultipartFile,
         @RequestPart(value = "restaurantRegister") restaurantRegisterRequest: RestaurantRegisterRequest,
@@ -36,6 +38,7 @@ class RestaurantController(
      * 식당 정보 삭제
      */
     @DeleteMapping("/{restaurantId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     fun deleteRestaurant(@PathVariable restaurantId: Long): ResponseEntity<Unit> {
         restaurantService.removeRestaurant(restaurantId)
         return ResponseEntity.ok().build()

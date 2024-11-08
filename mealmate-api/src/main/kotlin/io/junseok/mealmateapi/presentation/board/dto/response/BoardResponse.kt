@@ -14,7 +14,8 @@ data class BoardResponse(
     val boardId: Long,
     val email: String,
     val writerId: Long,
-    val department: String
+    val department: String,
+    val isRecruitment: Boolean
 ) {
     companion object {
         fun Board.fromBoard() = BoardResponse(
@@ -26,7 +27,8 @@ data class BoardResponse(
             boardId = this.boardId!!,
             email = this.member!!.email,
             writerId = this.member!!.memberId,
-            department = this.member!!.department
+            department = this.member!!.department,
+            isRecruitment = this.isRecruitment!!
         )
 
         fun Page<Board>.fromBoardByPaging(): Page<BoardResponse> {

@@ -14,4 +14,6 @@ interface BoardRepository {
         size: Int,
         restaurant: Restaurant,
     ): Page<Board>
+
+    fun updateRecruitment(board: Board)
 }

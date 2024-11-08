@@ -39,9 +39,9 @@ class BoardController(
     fun boardList(
         @RequestParam(value = "page") page: Int,
         @RequestParam(value = "size") size: Int,
-        @RequestParam(value = "department", required = false) department: String
+        @RequestParam(value = "department", required = false) department: String,
     ): ResponseEntity<Page<BoardResponse>> =
-        ResponseEntity.ok(boardService.showBoardList(page, size,department).fromBoardByPaging())
+        ResponseEntity.ok(boardService.showBoardList(page, size, department).fromBoardByPaging())
 
 
     /**
@@ -81,5 +81,16 @@ class BoardController(
         ResponseEntity.ok(
             boardService.getBoardByRestaurant(restaurantId, page, size).fromBoardByPaging()
         )
+
+    /**
+     * NOTE
+     * 모집 상태 변경 API
+     */
+    @PatchMapping("/update/recruitment/{boardId}")
+    fun updateRecruitmentStatus(
+        @PathVariable boardId: Long,
+        principal: Principal,
+    ): ResponseEntity<Unit> =
+        ResponseEntity.ok(boardService.modifyRecruitment(boardId, principal.name))
 
 }

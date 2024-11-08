@@ -58,4 +58,11 @@ class BoardEntityRepository(
         boardEntityJpaRepository.findAllByRestaurantOrderByCreateDtDesc(
             PageRequest.of(page, size), restaurant.toEntity()
         ).toDomainByPaging()
+
+    @Transactional
+    override fun updateRecruitment(board: Board) {
+        val boardEntity = (boardEntityJpaRepository.findByIdOrNull(board.boardId)
+            ?: throw MealMateException(ErrorCode.NOT_EXIST_BOARD))
+        boardEntity.updateRecruitment(!board.isRecruitment!!)
+    }
 }

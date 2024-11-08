@@ -1,7 +1,6 @@
 package io.junseok.mealmateapi.presentation.restaurantmenu
 
 import io.junseok.domain.restaurantmenu.RestaurantMenuService
-import io.junseok.mealmateapi.config.AdminReaderProvider
 import io.junseok.mealmateapi.presentation.restaurantmenu.dto.request.MenuRegisterRequest
 import io.junseok.mealmateapi.presentation.restaurantmenu.dto.request.MenuRegisterRequest.Companion.toDomain
 import org.springframework.http.ResponseEntity
