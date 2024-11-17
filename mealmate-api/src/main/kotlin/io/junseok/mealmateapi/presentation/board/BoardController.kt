@@ -90,7 +90,9 @@ class BoardController(
     fun updateRecruitmentStatus(
         @PathVariable boardId: Long,
         principal: Principal,
-    ): ResponseEntity<Unit> =
-        ResponseEntity.ok(boardService.modifyRecruitment(boardId, principal.name))
+    ): ResponseEntity<Unit> {
+        println("principal = ${principal.name}")
+        return ResponseEntity.ok(boardService.modifyRecruitment(boardId, principal.name))
+    }
 
 }
