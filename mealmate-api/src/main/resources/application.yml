@@ -11,3 +11,10 @@ jwt:
   header: ${JWT_HEADER}
   secret: ${JWT_SECRET_KEY}
   token-validity-in-seconds: ${JWT_EXPIRATION}
+
+management:
+  endpoints:
+    web:
+      base-path: /api/actuator
+      exposure:
+        include: "prometheus,health"
