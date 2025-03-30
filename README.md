@@ -17,6 +17,42 @@
 - BACKEND : Spring Framework, Kotlin 1.9.24, Mysql, Spring Data Jpa, AWS ec2, AWS S3, Docker, Docker-compose, CI/CD, Nginx   <br>
 - 버전 및 이슈관리 : Github, Github actions   <br>
 ---
+## Layered-Architecture
+```bash
+.
+├── build
+│   ├── bootJarMainClassName
+│   ├── kotlin
+│   ├── lombok
+│   └── tmp
+├── build.gradle.kts
+├── gradle
+│   └── wrapper
+├── gradlew
+├── gradlew.bat
+├── mealmate-api // Controller 모듈
+│   ├── build
+│   ├── build.gradle.kts
+│   └── src
+├── mealmate-common // 유틸 모듈
+│   ├── build
+│   ├── build.gradle.kts
+│   └── src
+├── mealmate-domain // 비즈니스 모듈
+│   ├── build
+│   ├── build.gradle.kts
+│   └── src
+├── mealmate-s3 // S3 업로드 모듈
+│   ├── build
+│   ├── build.gradle.kts
+│   └── src
+├── mealmate-storage // DAO 모듈
+│   ├── build
+│   ├── build.gradle.kts
+│   └── src
+└── settings.gradle.kts
+```
+---
 ## 주제
 - 혼밥러들을 위한 식사메이트 서비스
 ---
